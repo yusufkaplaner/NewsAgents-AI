@@ -1,54 +1,69 @@
-DataShield OSINT Engine
-DataShield is a high-performance, multi-agent Open Source Intelligence (OSINT) engine designed for deep entity profiling and automated digital footprint analysis. By leveraging the analytical power of Llama 3.1 (via Groq) and the synthesis capabilities of Gemini 2.5 Flash, it automates the process of gathering and verifying information across global and local networks.
+# DataShield OSINT Engine
+## Automated Entity Profiling and Global Intelligence Aggregator
 
-Features
-Global Intelligence Reach: Automatically translates queries to English to scan international sources (Reddit, forums, global news) while maintaining local context.
+DataShield is a professional-grade OSINT (Open Source Intelligence) framework designed for deep-web scanning, digital footprint mapping, and automated dossier generation. It orchestrates multiple LLM agents to verify information across global and local data networks.
 
-Dual-Agent Verification: Uses a "Detective" agent for raw data extraction and an "Arbiter" agent for final synthesis and truth verification.
+## Core Capabilities
 
-Deep OSINT Search: Powered by Tavily's advanced search depth to find information beyond surface-level Google results.
+- **Parallel Global Search**: Executes concurrent search operations in multiple languages to retrieve data from both local sources and global networks like Reddit, 4chan, and international news archives.
 
-Zero-Hallucination Policy: Strict temperature controls and system prompts ensure that the engine only reports verified data.
+- **Dual-Agent Analysis Pipeline**:
+  - **Detective (Llama 3.1)**: Performs aggressive raw data extraction, cross-references conflicting reports, and identifies potential leaks.
+  - **Arbiter (Gemini 2.5 Flash)**: Synthesizes findings into a formal intelligence report and calculates a reliability score based on source consistency.
 
-Professional Dossier Output: Generates structured intelligence reports including target identity, digital footprints, and potential leaks.
+- **Leak and Forum Monitoring**: Specifically targets unindexed information and community-driven leaks to find data often missed by standard search engines.
 
-Tech Stack
-Runtime: Node.js
+- **Anti-Hallucination Framework**: Implements strict temperature controls and target-locking prompts to ensure the engine remains focused on verified evidence.
 
-AI Framework: LangChain
+## Technical Architecture
 
-Models: Llama 3.1 8B (Groq), Gemini 2.5 Flash (Google)
+The system utilizes a high-concurrency fetch layer to feed data into a structured chain of large language models. This ensures that the context window is optimized while maintaining a broad search reach.
 
-Search Engine: Tavily OSINT API
+```javascript
+// DataShield Intelligence Logic
+async function analyzeIntelligence(targetQuery) {
+  // 1. Expand query for global reach
+  const expandedQuery = await translator.expand(targetQuery); 
+  
+  // 2. Parallel OSINT retrieval
+  const rawData = await tavily.search(expandedQuery, { depth: "advanced" }); 
+  
+  // 3. Agent deliberation
+  const analysis = await detective.process(rawData); 
+  return await arbiter.finalize(analysis); // Return formal dossier
+}
 
-Backend: Express.js
 
-Getting Started
-1. Prerequisites
-Node.js (v18 or higher)
+Setup and Deployment
 
-A Tavily API Key
-
-A Groq API Key
-
-A Google AI (Gemini) API Key
-
-2. Installation
-Bash
-git clone https://github.com/yourusername/datashield-osint.git
-cd datashield-osint
+1. Repository Initialization
+bash
+git clone https://github.com/yusufkaplaner/DataShield-OSINT.git
+cd DataShield-OSINT
 npm install
-3. Environment Setup
-Create a .env file in the root directory:
+2. Environment Configuration
+Create a .env file in the root directory with the following parameters:
 
-Kod snippet'i
-GOOGLE_API_KEY=your_google_key
-GROQ_API_KEY=your_groq_key
-TAVILY_API_KEY=your_tavily_key
-4. Run the Engine
-Bash
+env
+GOOGLE_API_KEY=your_gemini_api_key
+GROQ_API_KEY=your_llama3_api_key
+TAVILY_API_KEY=your_tavily_search_key
+PORT=3000
+3. Execution
+bash
 node index.js
-Access the interface at http://localhost:3000.
+The interface will be available at http://localhost:3000.
 
-Disclaimer
-This tool is intended for OSINT (Open Source Intelligence) purposes only. It only accesses publicly available data and must not be used for unauthorized surveillance or illegal activities.
+Interface and Intelligence Dossier
+The generated reports follow a strict intelligence community format:
+
+Target Profile: Core identity and operational status.
+
+Digital Footprint: Historical actions and affiliated entities.
+
+Leaks and Controversies: Declassified information and forum-based claims.
+
+Verified Sources: Direct links to primary and secondary evidence.
+
+Legal and Ethical Compliance
+This tool is built strictly for OSINT research and educational purposes. Users are responsible for complying with local privacy laws and the terms of service of any platform accessed through the engine.
