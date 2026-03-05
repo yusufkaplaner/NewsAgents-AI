@@ -43,12 +43,13 @@ cd DataShield-OSINT
 npm install
 2. Environment Configuration
 Create a .env file in the root directory with the following parameters:
-
+---
 env
 GOOGLE_API_KEY=your_gemini_api_key
 GROQ_API_KEY=your_llama3_api_key
 TAVILY_API_KEY=your_tavily_search_key
 PORT=3000
+---
 3. Execution
 bash
 node index.js
