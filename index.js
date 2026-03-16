@@ -23,7 +23,7 @@ const dedektifModel = new ChatGroq({
 // 2. Tavily search for OSINT data across web and forums
 async function tavilyAramaYap(query) {
     try {
-        console.log(`🕵️‍♂️ OSINT Araması Başlatıldı Hedef: "${query}"...`);
+        console.log(` OSINT Araması Başlatıldı Hedef: "${query}"...`);
         const response = await fetch("https://api.tavily.com/search", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -51,7 +51,7 @@ async function haberAnaliziYap(aranacakHaber) {
   try {
     aramaSonucu = await tavilyAramaYap(aranacakHaber);
   } catch (error) {
-    return "### ❌ İstihbarat Ağı Hatası\nTavily API'sine bağlanılamadı. Kotalar dolmuş olabilir.";
+    return "###  İstihbarat Ağı Hatası\nTavily API'sine bağlanılamadı. Kotalar dolmuş olabilir.";
   }
 
   // Detective prompt: focuses on leaks, forums, Reddit
@@ -82,16 +82,16 @@ async function haberAnaliziYap(aranacakHaber) {
     
     Lütfen şu formatta Markdown dilini kullanarak şık bir istihbarat raporu sun:
 
-    ### 📌 KESİNLEŞMİŞ GERÇEK VE SIRLAR
+    ###  KESİNLEŞMİŞ GERÇEK VE SIRLAR
     (Sadece "{hedef}" ile ilgili olayları, sızdırılmış forum/Reddit verilerini veya net gerçekleri açıkla. Alakasız saçmalıkları filtrele.)
 
-    ### 🔗 KANITLANMIŞ KAYNAKLAR
+    ###  KANITLANMIŞ KAYNAKLAR
     (Gerçeği, Reddit sızıntılarını veya iddiaları destekleyen linkler)
 
-    ### 🚨 TESPİT EDİLEN DEZENFORMASYON VEYA EFSANE
+    ###  TESPİT EDİLEN DEZENFORMASYON VEYA EFSANE
     (Hedefle ilgili forumlarda yayılan yalanlar, troller, örtbas girişimleri veya komplo teorileri)
 
-    ### 🎯 GÜVEN SKORU
+    ###  GÜVEN SKORU
     (% üzerinden. Resmi makamlar + Reddit/Forum sızıntıları birbirini tutuyorsa skoru yüksek ver.)
   `);
   const hakemChain = hakemPrompt.pipe(hakemModel);
@@ -131,7 +131,7 @@ app.get("/", (req, res) => {
     </head>
     <body>
         <div class="container">
-            <h1>👁️ VeriKalkanı: OSINT Ağı</h1>
+            <h1> VeriKalkanı: OSINT Ağı</h1>
             <p class="subtitle">Haber Ağları • Reddit & Forum Sızıntıları • Kesin Doğrulama</p>
             
             <textarea id="newsInput" class="input-box" rows="4" placeholder="Sızdırılacak veya doğrulanacak hedef bilgiyi girin..."></textarea>
@@ -165,7 +165,7 @@ app.get("/", (req, res) => {
                     document.getElementById('resultBox').innerHTML = marked.parse(data.result);
                     document.getElementById('resultBox').style.display = 'block';
                 } catch (error) {
-                    document.getElementById('resultBox').innerHTML = "<p style='color:#ff7b72;'>❌ Analiz sırasında kritik bir siber ağ hatası oluştu.</p>";
+                    document.getElementById('resultBox').innerHTML = "<p style='color:#ff7b72;'> Analiz sırasında kritik bir siber ağ hatası oluştu.</p>";
                     document.getElementById('resultBox').style.display = 'block';
                 } finally {
                     document.getElementById('analyzeBtn').disabled = false;
@@ -186,10 +186,10 @@ app.post("/api/analyze", async (req, res) => {
       res.json({ result: result });
   } catch (error) {
       console.error("Arka Plan Çökme Hatası:", error);
-      res.json({ result: `### ❌ Sistem Aşırı Yüklendi\nAPI kotalarımız dolmuş veya yapay zeka sunucuları anlık olarak yanıt vermiyor olabilir.\n\n**Arka Plan Hatası:** ${error.message}` });
+      res.json({ result: `###  Sistem Aşırı Yüklendi\nAPI kotalarımız dolmuş veya yapay zeka sunucuları anlık olarak yanıt vermiyor olabilir.\n\n**Arka Plan Hatası:** ${error.message}` });
   }
 });
 
 app.listen(3000, () => {
-  console.log("\\n🦅 DERİN İSTİHBARAT AĞI HEDEFE KİLİTLENDİ! Tarayıcında şu adresi aç: http://localhost:3000\\n");
+  console.log("\\n DERİN İSTİHBARAT AĞI HEDEFE KİLİTLENDİ! Tarayıcında şu adresi aç: http://localhost:3000\\n");
 });
